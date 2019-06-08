@@ -1,3 +1,4 @@
+import argparse
 import pathlib
 from shutil import copyfile
 import subprocess
@@ -41,7 +42,13 @@ def read_requirements(req_file):
 
 
 def main():
-    req_file = pathlib.Path('./requirements.txt')
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+            '-f', '--file',
+            help='File to update.',
+            default='./requirements.txt')
+    args = parser.parse_args()
+    req_file = pathlib.Path(args.file)
     requirement = read_requirements(req_file)
 
 
