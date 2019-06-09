@@ -23,7 +23,7 @@ def check_update(url, hash, name):
         return Repo(name, url, hash, remote_hash)
 
 
-def read_requirements(req_file):
+def update(req_file):
     """ read requirement and check updates. """
     if not req_file.exists():
         print('Cannot find requirements.txt')
@@ -49,7 +49,7 @@ def main():
             default='./requirements.txt')
     args = parser.parse_args()
     req_file = pathlib.Path(args.file)
-    requirement = read_requirements(req_file)
+    update(req_file)
 
 
 if __name__ == '__main__':
