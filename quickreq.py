@@ -1,6 +1,5 @@
 import argparse
 import pathlib
-from shutil import copyfile
 import subprocess
 import re
 from collections import namedtuple
@@ -29,9 +28,7 @@ def update(req_file):
         print('Cannot find requirements.txt')
         return
 
-    backup = f'{req_file.stem}.bak'
-    copyfile(req_file, pathlib.Path(backup))
-    with fileinput.input(files=[str(req_file)], inplace=True) as f:
+    with fileinput.input(files=[str(req_file)], inplace=True, backup='.bak') as f:
         for line in f:
             r = re.findall('^git\+(ssh.+\.git)@(\w+)#egg=(\w+)', line)
             if r:
